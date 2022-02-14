@@ -46,7 +46,6 @@ public class Base {
     @AfterClass(alwaysRun = true)
     public void tearDownDriver() {
         if (driver != null) driver.quit();
-
         LOG.info(" -- Driver closed -- ");
     }
 }
