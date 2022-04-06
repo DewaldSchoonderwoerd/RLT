@@ -12,7 +12,7 @@ public class Member {
     private int mmr1v1;
     private int mmr2v2;
     private int mmr3v3;
-    private int mmrTour;
+//    private int mmrTour;
     private double average;
     private int max;
     private int min;
@@ -58,13 +58,13 @@ public class Member {
         this.mmr3v3 = mmr3v3;
     }
 
-    public int getMmrTour() {
-        return mmrTour;
-    }
-
-    public void setMmrTour(int mmrTour) {
-        this.mmrTour = mmrTour;
-    }
+//    public int getMmrTour() {
+//        return mmrTour;
+//    }
+//
+//    public void setMmrTour(int mmrTour) {
+//        this.mmrTour = mmrTour;
+//    }
 
     public double getAverage() {
         return average;
@@ -106,7 +106,7 @@ public class Member {
                 ", mmr1v1='" + mmr1v1 + '\'' +
                 ", mmr2v2='" + mmr2v2 + '\'' +
                 ", mmr3v3='" + mmr3v3 + '\'' +
-                ", mmrTour='" + mmrTour + '\'' +
+//                ", mmrTour='" + mmrTour + '\'' +
                 ", average=" + average +
                 ", max=" + max +
                 ", min=" + min +

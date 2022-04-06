@@ -39,7 +39,7 @@ public class RLTProfilePage extends WebPageHelper {
         String mmr1v1 = null;
         String mmr2v2 = null;
         String mmr3v3 = null;
-        String mmrTour = null;
+//        String mmrTour = null;
         String rowsXpath = "/html/body/div[1]/div[2]/div[2]/div/main/div[2]/div[3]/div[1]/div/div/div[1]/div[2]/table/tbody/tr";
         List<WebElement> rows = driver.findElements(By.xpath(rowsXpath));
 
@@ -47,25 +47,25 @@ public class RLTProfilePage extends WebPageHelper {
             String currentRowText = row.getText();
 
             if (currentRowText.contains("Ranked Duel 1v1")) {
-                mmr1v1 = currentRowText.split("\n")[2];
+                mmr1v1 = currentRowText.split("\n")[2].replace(",", "");
                 member.setMmr1v1(Integer.parseInt(mmr1v1));
                 continue;
             }
             if (currentRowText.contains("Ranked Doubles 2v2")) {
-                mmr2v2 = currentRowText.split("\n")[2];
+                mmr2v2 = currentRowText.split("\n")[2].replace(",", "");
                 member.setMmr2v2(Integer.parseInt(mmr2v2));
                 continue;
             }
             if (currentRowText.contains("Ranked Standard 3v3")) {
-                mmr3v3 = currentRowText.split("\n")[2];
+                mmr3v3 = currentRowText.split("\n")[2].replace(",", "");
                 member.setMmr3v3(Integer.parseInt(mmr3v3));
                 continue;
             }
-            if (currentRowText.contains("Tournament Matches")) {
-                mmrTour = currentRowText.split("\n")[2];
-                member.setMmrTour(Integer.parseInt(mmrTour));
-                continue;
-            }
+//            if (currentRowText.contains("Tournament Matches")) {
+//                mmrTour = currentRowText.split("\n")[2].replace(",", "");
+//                member.setMmrTour(Integer.parseInt(mmrTour));
+//                continue;
+//            }
 
             if (mmr1v1 == null)
                 member.setMmr1v1(0);
@@ -76,8 +76,8 @@ public class RLTProfilePage extends WebPageHelper {
             if (mmr3v3 == null)
                 member.setMmr3v3(0);
 
-            if (mmrTour == null)
-                member.setMmrTour(0);
+//            if (mmrTour == null)
+//                member.setMmrTour(0);
         }
 
         LOG.info("Rank Pulled");

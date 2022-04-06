@@ -11,7 +11,8 @@ public class Maths {
     private static final Logger LOG = LoggerFactory.getLogger(Maths.class);
 
     public static void agg(Member member) {
-        int[] tab = {member.getMmr1v1(), member.getMmr2v2(), member.getMmr3v3(), member.getMmrTour()};
+//        int[] tab = {member.getMmr1v1(), member.getMmr2v2(), member.getMmr3v3(), member.getMmrTour()};
+        int[] tab = {member.getMmr1v1(), member.getMmr2v2(), member.getMmr3v3()};
         int min = Arrays.stream(tab).min().getAsInt();
         int max = Arrays.stream(tab).max().getAsInt();
         int sum = Arrays.stream(tab).sum();

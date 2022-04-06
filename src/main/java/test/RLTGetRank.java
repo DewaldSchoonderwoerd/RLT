@@ -46,7 +46,7 @@ public class RLTGetRank extends Base {
             member.setMmr1v1(0);
             member.setMmr2v2(0);
             member.setMmr3v3(0);
-            member.setMmrTour(0);
+//            member.setMmrTour(0);
         }
 
         memberList.add(member);
@@ -65,11 +65,11 @@ public class RLTGetRank extends Base {
         row.createCell(2).setCellValue("MMR 1v1");
         row.createCell(3).setCellValue("MMR 2v2");
         row.createCell(4).setCellValue("MMR 3v3");
-        row.createCell(5).setCellValue("MMR TOURNAMENT");
-        row.createCell(6).setCellValue("AVERAGE MMR");
-        row.createCell(7).setCellValue("TOTAL SUM OF MMR");
-        row.createCell(8).setCellValue("MAX MMR");
-        row.createCell(9).setCellValue("MIN MMR");
+//        row.createCell(5).setCellValue("MMR TOURNAMENT");
+        row.createCell(5).setCellValue("AVERAGE MMR");
+        row.createCell(6).setCellValue("TOTAL SUM OF MMR");
+        row.createCell(7).setCellValue("MAX MMR");
+        row.createCell(8).setCellValue("MIN MMR");
 
         LOG.info("Members full list - " + memberList);
         for (Member aMember : memberList) {
@@ -81,7 +81,7 @@ public class RLTGetRank extends Base {
             row.createCell(columnCount++).setCellValue(aMember.getMmr1v1());
             row.createCell(columnCount++).setCellValue(aMember.getMmr2v2());
             row.createCell(columnCount++).setCellValue(aMember.getMmr3v3());
-            row.createCell(columnCount++).setCellValue(aMember.getMmrTour());
+//            row.createCell(columnCount++).setCellValue(aMember.getMmrTour());
             row.createCell(columnCount++).setCellValue(aMember.getAverage());
             row.createCell(columnCount++).setCellValue(aMember.getSum());
             row.createCell(columnCount++).setCellValue(aMember.getMax());
