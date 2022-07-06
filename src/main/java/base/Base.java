@@ -1,9 +1,11 @@
 package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
@@ -31,6 +33,7 @@ public class Base {
         chromeOptions.addArguments("start-maximized");
         chromeOptions.addArguments("disable-infobars");
         chromeOptions.addArguments("--disable-extensions");
+
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
 

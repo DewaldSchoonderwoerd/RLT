@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,8 +19,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import static base.web.utls.Maths.agg;
 
 public class RLTGetRank extends Base {
 
@@ -35,18 +34,25 @@ public class RLTGetRank extends Base {
     @Test(dataProvider = "memberList", dataProviderClass = DataProviderClass.class)
     public void getRank(String memberName, String platform) {
         Member member = new Member(memberName, platform);
+        member.setPlatform(platform);
+        member.setGamerTag(memberName);
+
+        if (memberName == null || platform == null){
+            LOG.error("Not a valid member");
+            Assert.fail();
+        }
 
         LOG.info("Fetch MMR for: " + memberName + " - " + platform);
         try {
             rltProfilePage.goTo(platform, memberName);
             rltProfilePage.pullMmr(member);
             LOG.info("Fetch complete");
-            agg(member);
+            member.setAgg();
         } catch (org.openqa.selenium.TimeoutException e) {
+            LOG.info("Selenium Timeout - " + e.getLocalizedMessage());
             member.setMmr1v1(0);
             member.setMmr2v2(0);
             member.setMmr3v3(0);
-//            member.setMmrTour(0);
         }
 
         memberList.add(member);
@@ -65,11 +71,7 @@ public class RLTGetRank extends Base {
         row.createCell(2).setCellValue("MMR 1v1");
         row.createCell(3).setCellValue("MMR 2v2");
         row.createCell(4).setCellValue("MMR 3v3");
-//        row.createCell(5).setCellValue("MMR TOURNAMENT");
         row.createCell(5).setCellValue("AVERAGE MMR");
-        row.createCell(6).setCellValue("TOTAL SUM OF MMR");
-        row.createCell(7).setCellValue("MAX MMR");
-        row.createCell(8).setCellValue("MIN MMR");
 
         LOG.info("Members full list - " + memberList);
         for (Member aMember : memberList) {
@@ -81,11 +83,7 @@ public class RLTGetRank extends Base {
             row.createCell(columnCount++).setCellValue(aMember.getMmr1v1());
             row.createCell(columnCount++).setCellValue(aMember.getMmr2v2());
             row.createCell(columnCount++).setCellValue(aMember.getMmr3v3());
-//            row.createCell(columnCount++).setCellValue(aMember.getMmrTour());
-            row.createCell(columnCount++).setCellValue(aMember.getAverage());
-            row.createCell(columnCount++).setCellValue(aMember.getSum());
-            row.createCell(columnCount++).setCellValue(aMember.getMax());
-            row.createCell(columnCount).setCellValue(aMember.getMin());
+            row.createCell(columnCount).setCellValue(aMember.getAverage());
         }
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

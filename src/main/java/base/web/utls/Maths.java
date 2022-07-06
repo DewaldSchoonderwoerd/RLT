@@ -13,17 +13,17 @@ public class Maths {
     public static void agg(Member member) {
 //        int[] tab = {member.getMmr1v1(), member.getMmr2v2(), member.getMmr3v3(), member.getMmrTour()};
         int[] tab = {member.getMmr1v1(), member.getMmr2v2(), member.getMmr3v3()};
-        int min = Arrays.stream(tab).min().getAsInt();
-        int max = Arrays.stream(tab).max().getAsInt();
-        int sum = Arrays.stream(tab).sum();
+//        int min = Arrays.stream(tab).min().getAsInt();
+//        int max = Arrays.stream(tab).max().getAsInt();
+//        int sum = Arrays.stream(tab).sum();
 
         double average = 0;
         if (Arrays.stream(tab).average().isPresent())
             average = Arrays.stream(tab).average().getAsDouble();
 
-        member.setMax(max);
-        member.setMin(min);
-        member.setSum(sum);
+//        member.setMax(max);
+//        member.setMin(min);
+//        member.setSum(sum);
         member.setAverage(average);
 
         LOG.info(member.toString());

@@ -1,6 +1,14 @@
 package model.member;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import test.RLTGetRank;
+
+import java.util.Arrays;
+
 public class Member {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RLTGetRank.class);
 
     public Member(String gamerTag, String platform) {
         this.gamerTag = gamerTag;
@@ -12,11 +20,7 @@ public class Member {
     private int mmr1v1;
     private int mmr2v2;
     private int mmr3v3;
-//    private int mmrTour;
     private double average;
-    private int max;
-    private int min;
-    private int sum;
 
     public String getGamerTag() {
         return gamerTag;
@@ -58,44 +62,12 @@ public class Member {
         this.mmr3v3 = mmr3v3;
     }
 
-//    public int getMmrTour() {
-//        return mmrTour;
-//    }
-//
-//    public void setMmrTour(int mmrTour) {
-//        this.mmrTour = mmrTour;
-//    }
-
     public double getAverage() {
         return average;
     }
 
     public void setAverage(double average) {
         this.average = average;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
-    }
-
-    public int getMin() {
-        return min;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
     }
 
     @Override
@@ -106,11 +78,18 @@ public class Member {
                 ", mmr1v1='" + mmr1v1 + '\'' +
                 ", mmr2v2='" + mmr2v2 + '\'' +
                 ", mmr3v3='" + mmr3v3 + '\'' +
-//                ", mmrTour='" + mmrTour + '\'' +
                 ", average=" + average +
-                ", max=" + max +
-                ", min=" + min +
-                ", sum=" + sum +
                 '}';
+    }
+
+    public void setAgg(){
+        int[] tab = {this.getMmr1v1(), this.getMmr2v2(), this.getMmr3v3()};
+
+        double average = 0;
+        if (Arrays.stream(tab).average().isPresent())
+            average = Arrays.stream(tab).average().getAsDouble();
+        this.setAverage(average);
+
+        LOG.info(this.toString());
     }
 }

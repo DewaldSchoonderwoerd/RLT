@@ -1,6 +1,5 @@
 package dataprovider;
 
-import base.Base;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -21,6 +20,7 @@ public class DataProviderClass {
                 path.getAbsolutePath() + sheetPath + spreadSheetName + ".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet sheet = workbook.getSheet(sheetName);
+
         file.close();
         return sheet;
     }
