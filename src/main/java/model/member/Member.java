@@ -2,25 +2,30 @@ package model.member;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import test.RLTGetRank;
 
 import java.util.Arrays;
 
 public class Member {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RLTGetRank.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Member.class);
 
-    public Member(String gamerTag, String platform) {
+    public Member(String gamerTag, String platform, boolean isActive, String airTableId, String discordName) {
         this.gamerTag = gamerTag;
         this.platform = platform;
+        this.discordName = discordName;
+        this.isActive = isActive;
+        this.airTableId = airTableId;
     }
 
     private String gamerTag;
     private String platform;
+    private String discordName;
+    private boolean isActive;
+    private String airTableId;
     private int mmr1v1;
     private int mmr2v2;
     private int mmr3v3;
-    private double average;
+    private int average;
 
     public String getGamerTag() {
         return gamerTag;
@@ -62,12 +67,36 @@ public class Member {
         this.mmr3v3 = mmr3v3;
     }
 
-    public double getAverage() {
+    public int getAverage() {
         return average;
     }
 
-    public void setAverage(double average) {
+    public void setAverage(int average) {
         this.average = average;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getAirTableId() {
+        return airTableId;
+    }
+
+    public void setAirTableId(String airTableId) {
+        this.airTableId = airTableId;
+    }
+
+    public String getDiscordName() {
+        return discordName;
+    }
+
+    public void setDiscordName(String discordName) {
+        this.discordName = discordName;
     }
 
     @Override
@@ -75,9 +104,12 @@ public class Member {
         return "Member{" +
                 "gamerTag='" + gamerTag + '\'' +
                 ", platform='" + platform + '\'' +
-                ", mmr1v1='" + mmr1v1 + '\'' +
-                ", mmr2v2='" + mmr2v2 + '\'' +
-                ", mmr3v3='" + mmr3v3 + '\'' +
+                ", discordName='" + discordName + '\'' +
+                ", isActive=" + isActive +
+                ", airTableId='" + airTableId + '\'' +
+                ", mmr1v1=" + mmr1v1 +
+                ", mmr2v2=" + mmr2v2 +
+                ", mmr3v3=" + mmr3v3 +
                 ", average=" + average +
                 '}';
     }
@@ -85,9 +117,9 @@ public class Member {
     public void setAgg(){
         int[] tab = {this.getMmr1v1(), this.getMmr2v2(), this.getMmr3v3()};
 
-        double average = 0;
+        int average = 0;
         if (Arrays.stream(tab).average().isPresent())
-            average = Arrays.stream(tab).average().getAsDouble();
+            average = (int) Arrays.stream(tab).average().getAsDouble();
         this.setAverage(average);
 
         LOG.info(this.toString());

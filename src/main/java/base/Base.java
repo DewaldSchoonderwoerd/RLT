@@ -28,11 +28,16 @@ public class Base {
     @Parameters({"platformType", "browserName"})
     @BeforeClass(alwaysRun = true)
     public void setupDriver() {
+
         LOG.info(" -- init driver -- ");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("start-maximized");
         chromeOptions.addArguments("disable-infobars");
         chromeOptions.addArguments("--disable-extensions");
+//        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--window-size=1920,1080");
+        chromeOptions.addArguments("--ignore-certificate-errors");
+        chromeOptions.addArguments("--allow-running-insecure-content");
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
